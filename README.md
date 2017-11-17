@@ -13,5 +13,5 @@ Then go to http://127.0.0.1:5000/
 
 Type something like:
 
-"You are suffering from hyptertension"
-"You have been diagnosed with Leukaemia"
+1. "You are suffering from hyptertension"
+2. "You have been diagnosed with Leukaemia"
