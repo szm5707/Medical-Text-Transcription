@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+  </style>
+  <title>Design Analysis Technology Advancement Laboratory</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <!-- <script src="/Users/sahilmishra/Desktop/background.js"></script> -->
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+    /*.bgimg {
+      background-image: url('/static/bcg.png');
+      background-size: 1400px 100px;
+    }*/
+
+    h1 {
+      font-family: cursive;
+    }
+
+    span {
+      width: 20px;
+
+    }
+
+    output {
+      display: inline;
+      width: 20px;
+      color: green;
+    }
+}
+  </style>
+  <script type=text/javascript>
+    $(function() {
+      $('a#classifyText').bind('click', function() {
+        $.getJSON('/classifyText', {
+          a: $('input[name="a"]').val()
+        }, function(data) {
+          $("#result").text(data.result);
+        });
+        return false;
+      });
+    });
+
+    var now = new Date().getTime();
+
+    function myTestFunction() {
+      console.log("Resetting!");
+      var new_now = new Date().getTime();
+      if ((new_now - now) > 2000){
+        console.log("Not sending!");
+      }
+      else {
+        console.log("sending");
+        setTimeout(function(){
+          $.getJSON('/classifyText', {
+            a: $('input[name="a"]').val()
+          }, function(data) {
+            $("#result").text(data.result);
+          });
+          return false;
+        }, 2000);
+      }
+      now = new Date().getTime();
+      //console.log(now);
+      //sclearTimeout();
+      // The function returns the product of p1 and p2
+    }
+
+    console.log("Here");
+    //setup before functions
+    var typingTimer;                //timer identifier
+    var doneTypingInterval = 2000;  //time in ms, 5 second for example
+    var $input = $('a');
+
+    //on keyup, start the countdown
+    $input.on('keyup', function () {
+      console.log("Starting\n");
+      clearTimeout(typingTimer);
+      typingTimer = setTimeout(doneTyping, doneTypingInterval);
+    });
+
+    //on keydown, clear the countdown
+    $input.on('keydown', function () {
+      clearTimeout(typingTimer);
+    });
+
+    //user is "finished typing," do something
+    function doneTyping () {
+      console.log("Done typing!");
+      $.getJSON('/classifyText', {
+        a: $('input[name="a"]').val()
+      }, function(data) {
+        $("#result").text(data.result);
+      });
+      //do something
+    }
+  </script>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" style="font-family:Times New Roman">Design Analysis Technology Advancement Laboratory</a>
+    </div>
+  </div>
+</nav>
+
+<div class="bgimg">
+  <div class="container text-center" style="color:Black">
+    <h1>Medical Text Transcription</h1>
+    <p>This project uses Deep Learning to convert a complex medical document into easily understandable content.</p>
+  </div>
+</div>
+<!-- <div> <canvas id="background" width="20" height="20">
+    <h1> Medical Text Transcription </h3>
+  </canvas>
+</div> -->
+
+<div style="background-color:#17AFFC" class="container-fluid bg-3 text-center">
+  <h3></h3><br>
+  <div class="row">
+    <div>
+      <img src="{{url_for('static', filename='doctor.png')}}" style="width:100px; height:150px"/>
+      <input type="text" onkeyup="myTestFunction()" size="100" name="a" placeholder="Enter text here..." style="background-color:#767474; color:White;">
+      <p>
+      <p><a href="javascript:void();" id="classifyText">SUBMIT</a>
+    </div>
+  </div>
+</div>
+
+<div style="background-color:#478DB0"class="container-fluid bg-3 text-center">
+  <div class="row">
+    <div class="col">
+      <h3></h3>
+      <img src="{{url_for('static', filename='patient.png')}}" style="width:90px; height:150px"/>
+      <output id="result" style="color:white; font-family:courier new; font-size:300%; width:200px;height:200px;padding:20px">Simplified text...</output>
+      <!-- <output name="result"></output> -->
+      <!-- <output id="result" type="text" size="100" name="b" placeholder="Simplified Text..." style="background-color:Black; color:White;"> -->
+    </div>
+  </div>
+  <br><br><br><br><br><br><br><br><br><br>
+</div>
+
+<footer class="container-fluid text-center">
+  <p>CHOT - Pennsylvania State University</p>
+</footer>
+
+</body>
+</html>
