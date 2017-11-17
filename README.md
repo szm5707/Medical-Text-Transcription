@@ -5,7 +5,7 @@ Dependecies:
 1. Flask (http://flask.pocoo.org)
 2. PyTorch (http://pytorch.org)
 
-To run:
+To run (tested on Python 2.7):
 
 python flask_server.py
 
