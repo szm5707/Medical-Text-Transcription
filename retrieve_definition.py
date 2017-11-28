@@ -1,8 +1,8 @@
 import requests
 import json
 
-app_id = '6db5c550'
-app_key = '22e5fe65f32b753f661069a4e8076389'
+app_id = 'Your App ID'
+app_key = 'Your APP KEY'
 
 language = 'en'
 
